@@ -1,0 +1,13 @@
+{
+    "name": "node-ex-website",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "convert-csv-to-json": "^1.0.0",
+        "csv": "^5.3.2",
+        "express": "^4.17.1"
+    }
+}

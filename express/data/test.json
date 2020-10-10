@@ -1,0 +1,8 @@
+{
+    "students":
+    {
+        "name": ["Aidan Pare", "Karim Durrani", "Bobby King", "Jennifer Nguyen", "Frances Watson"],
+        "age": [26, 24, 31, 20, 21],
+        "major": ["Computer Science", "Computer Science", "Computer Science", "Computer Science", "Computer Science"]
+    }
+}
