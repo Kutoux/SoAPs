@@ -1,0 +1,28 @@
+<mxfile host="app.diagrams.net" modified="2020-10-14T03:45:44.651Z" agent="5.0 (Windows)" etag="LNk537mN3_l3ajgsBZSB" version="13.7.9" type="github">
+  <diagram id="prtHgNgQTEPvFCAcTncT" name="Page-1">
+    <mxGraphModel dx="1038" dy="547" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="dNxyNK7c78bLwvsdeMH5-11" value="Architecture Design" style="swimlane;html=1;startSize=20;horizontal=1;containerType=tree;glass=0;" parent="1" vertex="1">
+          <mxGeometry x="40" y="80" width="710" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="qn2GRZ31Gj4-trIvuPqW-1" value="" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;" vertex="1" parent="dNxyNK7c78bLwvsdeMH5-11">
+          <mxGeometry x="30" y="60" width="640" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="qn2GRZ31Gj4-trIvuPqW-3" value="REST API" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="dNxyNK7c78bLwvsdeMH5-11">
+          <mxGeometry x="50" y="80" width="75" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="qn2GRZ31Gj4-trIvuPqW-5" value="" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;" vertex="1" parent="dNxyNK7c78bLwvsdeMH5-11">
+          <mxGeometry x="80" y="140" width="280" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="qn2GRZ31Gj4-trIvuPqW-6" value="SQL Database" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="dNxyNK7c78bLwvsdeMH5-11">
+          <mxGeometry x="90" y="160" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="qn2GRZ31Gj4-trIvuPqW-2" value="User Interace" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+          <mxGeometry x="55" y="110" width="90" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
