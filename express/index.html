@@ -22,11 +22,11 @@ $.ajax({
     url: queryURL,
     method: "GET",
     dataType: "text",
-    success: function(response)  
+    /*success: function(response)  
 	  {
 		data = $.csv.toArrays(response);
 		generateHtmlTable(data);
-	  },   
+	  },*/   
     // this headers section is necessary for CORS-anywhere
     headers: {
     "x-requested-with": "xhr" 
@@ -34,12 +34,13 @@ $.ajax({
     }).done(function(response) {
     console.log('CORS anywhere response');
     console.log(response);
+    document.write(response);
     }).fail(function(jqXHR, textStatus) { 
     //console.error(textStatus)
 }) 
 
 
-function generateHtmlTable(data) {
+/*function generateHtmlTable(data) {
     var html = '<table  class="table table-condensed table-hover table-striped">';
 
       if(typeof(data[0]) === 'undefined') {
@@ -73,5 +74,5 @@ function generateHtmlTable(data) {
 		alert(html);
 		$('#csv-display').append(html);
 	  }
-	}	
+	}	*/
 </script>
