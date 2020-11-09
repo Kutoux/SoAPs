@@ -77,7 +77,7 @@ app.get('/api/products/:id',(req, res) => {
  */
 //add new product
 /*
-app.post('https://raw.github.com/nytimes/covid-19-data/blob/master/us.csv',(req, res) => {
+app.post('/api/covid',(req, res) => {
   let data = [req.body.date, req.body.cases, req.body.deaths]
   let sql = "INSERT INTO us";
   let query = conn.query(sql, data,(err, results) => {
@@ -89,8 +89,7 @@ app.post('https://raw.github.com/nytimes/covid-19-data/blob/master/us.csv',(req,
  /*
 //update product
 app.put('/api/products/:id',(req, res) => {
-  let sql = "UPDATE product SET product_name='"+req.body.product_name+"', product_price='"+req.body.product_price+"' WHERE product_id="+req.params.id;
-  let query = conn.query(sql, (err, results) => {
+let data = {product_name: req.body.product_name, product_price: req.body.product_price};  let query = conn.query(sql, (err, results) => {
     if(err) throw err;
     res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
   });

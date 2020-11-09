@@ -2,19 +2,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
 
 <script>
-  /*  function arrayToTable(tableData) {
-        var table = $('<table></table>');
-        $(tableData).each(function (i, rowData) {
-            var row = $('<tr></tr>');
-            $(rowData).each(function (j, cellData) {
-                row.append($('<td>'+cellData+'</td>'));
-            });
-            table.append(row);
-        });
-        return table;
-    }
-*/
-//var originalURL = "https://github.com/nytimes/covid-19-data/blob/master/us-states.csv";
+
 var originalURL = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv";
 var queryURL = "https://cors-anywhere.herokuapp.com/" + originalURL;
 var data;
@@ -22,57 +10,53 @@ $.ajax({
     url: queryURL,
     method: "GET",
     dataType: "text",
-    /*success: function(response)  
-	  {
-		data = $.csv.toArrays(response);
-		generateHtmlTable(data);
-	  },*/   
     // this headers section is necessary for CORS-anywhere
     headers: {
     "x-requested-with": "xhr" 
     }
     }).done(function(response) {
     console.log('CORS anywhere response');
-    console.log(response);
-    document.write(response);
+    //console.log(response);
+	successFunction(response);
+	//document.write(response);
     }).fail(function(jqXHR, textStatus) { 
     //console.error(textStatus)
 }) 
 
-
-/*function generateHtmlTable(data) {
-    var html = '<table  class="table table-condensed table-hover table-striped">';
-
-      if(typeof(data[0]) === 'undefined') {
-        return null;
+function successFunction(data) {
+  var allRows = data.split(/\r?\n|\r/);
+  var table = '<table>';
+  for (var singleRow = 0; singleRow < allRows.length; singleRow++) {
+    if (singleRow === 0) {
+      table += '<thead>';
+      table += '<tr>';
+    } else {
+      table += '<tr>';
+    }
+    var rowCells = allRows[singleRow].split(',');
+    for (var rowCell = 0; rowCell < rowCells.length; rowCell++) {
+      if (singleRow === 0) {
+        table += '<th>';
+        table += rowCells[rowCell];
+        table += '</th>';
       } else {
-		$.each(data, function( index, row ) {
-		  //bind header
-		  if(index == 0) {
-			html += '<thead>';
-			html += '<tr>';
-			$.each(row, function( index, colData ) {
-				html += '<th>';
-				html += colData;
-				html += '</th>';
-			});
-			html += '</tr>';
-			html += '</thead>';
-			html += '<tbody>';
-		  } else {
-			html += '<tr>';
-			$.each(row, function( index, colData ) {
-				html += '<td>';
-				html += colData;
-				html += '</td>';
-			});
-			html += '</tr>';
-		  }
-		});
-		html += '</tbody>';
-		html += '</table>';
-		alert(html);
-		$('#csv-display').append(html);
-	  }
-	}	*/
+        table += '<td>';
+        table += rowCells[rowCell];
+        table += '</td>';
+      }
+    }
+    if (singleRow === 0) {
+      table += '</tr>';
+      table += '</thead>';
+      table += '<tbody>';
+    } else {
+      table += '</tr>';
+    }
+  } 
+  table += '</tbody>';
+  table += '</table>';
+  
+  $('body').append(table);
+}
+
 </script>
