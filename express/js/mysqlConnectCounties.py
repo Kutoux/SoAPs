@@ -1,7 +1,9 @@
 import mysql.connector
 import geojson
 import ast
+from datetime import datetime, timedelta
 
+yesterday = (datetime.now() - timedelta(1)).strftime('%Y-%m-%d')
 
 file_counties = 'express/data/test.geojson'
 file_new_counties = 'express/data/counties_deaths.geojson'
@@ -16,7 +18,7 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
-mycursor.execute("SELECT * FROM counties WHERE date = '2020-11-20'")
+mycursor.execute("SELECT * FROM counties WHERE date = '" + yesterday + "'")
 
 myresult = mycursor.fetchall()
 

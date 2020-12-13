@@ -84,8 +84,21 @@ var layerGroup = L.layerGroup().addTo(map);
 // Add basemap
 L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
   maxZoom: 18,
-  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>; The SoAPs: Bobby King, Jennifer Nguyen, Karim Durrani, Aidan Pare, Frances Watson'
 }).addTo(map)
+
+/*
+function getColor(d) {
+  return d > 1000 ? '#800026' :
+         d > 500  ? '#BD0026' :
+         d > 200  ? '#E31A1C' :
+         d > 100  ? '#FC4E2A' :
+         d > 50   ? '#FD8D3C' :
+         d > 20   ? '#FEB24C' :
+         d > 10   ? '#FED976' :
+                    '#FFEDA0';
+}
+*/
 
 function mapInfo(){
 // Add GeoJSON
@@ -93,8 +106,8 @@ $.getJSON(geoData, function (geojson) {
   layerGroup.clearLayers(),
   L.choropleth(geojson, {
     valueProperty: 'deaths',
-    scale: ['white', 'red'],
-    steps: 5,
+    scale: ['#ffffb2', '#e31a1c'],
+    steps: 6,
     mode: 'q',
     style: {
       color: '#fff',
@@ -113,6 +126,26 @@ $.getJSON(geoData, function (geojson) {
 })
 }
 
+
+/*
+function style(feature) {
+  return {
+      fillColor: getColor(feature.properties.deaths),
+      weight: 2,
+      opacity: 1,
+      color: 'white',
+      dashArray: '3',
+      fillOpacity: 0.8
+  };
+}
+*/
+
+
+/*
+$('#header').function(){
+
+}
+*/
 //$(":button").css("background-color", "red");
 $('#button1').click(function (){
   console.log("button1");
@@ -127,6 +160,7 @@ $('#button1').click(function (){
   geoData = countiesData;
   mapInfo();
  });
+ 
  
 
  /*

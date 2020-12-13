@@ -39,8 +39,28 @@ fetch('https://raw.githubusercontent.com/nytimes/covid-19-data/master/us.csv')
           if (error) {
             console.error(error);
           } else {
-            let query =
-              "INSERT INTO us(date, cases, deaths) VALUES ?";
+            let query = "use covid_map;";
+              connection.query(query, (error, response) => {
+                console.log(error, response);
+              });
+
+              query = "set sql_safe_updates = 0;";
+              connection.query(query, (error, response) => {
+                console.log(error, response);
+              });
+
+            query = "DROP TABLE if exists us;";
+              connection.query(query, (error, response) => {
+                console.log(error, response);
+              });
+
+            query = " create table us ( date varchar(255),cases int,deaths int,primary key (date));";
+              connection.query(query, (error, response) => {
+                console.log(error, response);
+              });
+
+
+            query = "INSERT INTO us(date, cases, deaths) VALUES ?";
             connection.query(query, [newArr], (error, response) => {
               console.log(error, response);
             });
