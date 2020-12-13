@@ -72,18 +72,27 @@ function updateData(filter){
 */
 
 
-var map = L.map('map').setView([39.9897471840457, -75.13893127441406], 11)
+var countiesData = 'data/counties_deaths.geojson';
+var statesData = 'data/states_deaths.geojson';
+var geoData = countiesData;
+var mapArr =[];
+//var map = L.map('map').setView([39.9897471840457, -75.13893127441406], 4)
 
+
+var map = L.map('map').setView([41.4925, -99.9018], 4)
+var layerGroup = L.layerGroup().addTo(map);
 // Add basemap
 L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
   maxZoom: 18,
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map)
 
+function mapInfo(){
 // Add GeoJSON
-$.getJSON('data/counties_deaths.geojson', function (geojson) {
+$.getJSON(geoData, function (geojson) {
+  layerGroup.clearLayers(),
   L.choropleth(geojson, {
-    valueProperty: 'population',
+    valueProperty: 'deaths',
     scale: ['white', 'red'],
     steps: 5,
     mode: 'q',
@@ -93,12 +102,39 @@ $.getJSON('data/counties_deaths.geojson', function (geojson) {
       fillOpacity: 0.8
     },
     onEachFeature: function (feature, layer) {
-      layer.bindPopup('<b>' + feature.properties["state_name"].toUpperCase() + '<br>' + feature.properties["County Name"].toUpperCase() + '<br>' + 'Deaths: ' + '<i>' + feature.properties["population"])
+      if(geoData == countiesData){
+        layer.bindPopup('<b>' + feature.properties["state_name"].toUpperCase() + '<br>' + feature.properties["County Name"].toUpperCase() + '<br>' + 'Deaths: ' + '<i>' + feature.properties["deaths"])
+      }
+      else if(geoData == statesData){
+        layer.bindPopup('<b>' + feature.properties["name"].toUpperCase() + '<br>' + 'Deaths: ' + '<i>' + feature.properties["deaths"])
+      }
     }
-  }).addTo(map)
+  }).addTo(layerGroup)
 })
+}
 
+//$(":button").css("background-color", "red");
+$('#button1').click(function (){
+  console.log("button1");
+  //clearLayers();
+  geoData = statesData;
+  mapInfo();
+ });
 
+ $('#button2').click(function (){
+  console.log("button2");
+  //map.clearLayers();
+  geoData = countiesData;
+  mapInfo();
+ });
+ 
+
+ /*
+var element = document.getElementById('button1');
+element.onclick = function () {
+  
+};
+*/
 /*
 $.updateData({ url: 'get.php',
          data: {'fips':feature.properties["countyFIPS"]},
