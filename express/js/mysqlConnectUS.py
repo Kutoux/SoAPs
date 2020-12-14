@@ -7,8 +7,8 @@ yesterday = (datetime.now() - timedelta(1)).strftime('%Y-%m-%d')
 
 
 
-file_states = 'express/data/us-states.geojson'
-file_new_states = 'express/data/states_deaths.geojson'
+file_us = 'express/data/us.geojson'
+file_new_us = 'express/data/us_deaths.geojson'
 d = {}
 
 mydb = mysql.connector.connect(
@@ -20,26 +20,23 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
-mycursor.execute("SELECT * FROM states WHERE date = '" + yesterday + "'")
+mycursor.execute("SELECT * FROM us WHERE date = '" + yesterday + "'")
 
 myresult = mycursor.fetchall()
 
 i = 0
 
+d[myresult[0][0]]=myresult[0][2]
+cases = myresult[0][1]
 
-for x in myresult:
-    d[myresult[i][3]]=myresult[i][5]
-    i+=1
-
-
-
-#states data
-with open(file_states, 'r') as f:
+#us data
+with open(file_us, 'r') as f:
     data = geojson.load(f)
 
 for feature in data['features']:
-    if feature['id'] in d:
-        feature['properties']['deaths']=d[feature['id']]
+    feature['properties']['deaths']=d[yesterday]
+    feature['properties']['date']=yesterday
+    feature['properties']['cases']=cases
 
-with open(file_new_states, 'w+') as f:
+with open(file_new_us, 'w+') as f:
     geojson.dump(data, f, indent=2)
