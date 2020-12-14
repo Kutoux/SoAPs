@@ -144,8 +144,9 @@
         ]
       },
       "properties": {
+        "cases": "292841",
         "name": "Alabama",
-        "deaths": "3451"
+        "deaths": "4102"
       }
     },
     {
@@ -4609,8 +4610,9 @@
         ]
       },
       "properties": {
+        "cases": "40293",
         "name": "Alaska",
-        "deaths": "95"
+        "deaths": "169"
       }
     },
     {
@@ -4752,8 +4754,9 @@
         ]
       },
       "properties": {
+        "cases": "405656",
         "name": "Arizona",
-        "deaths": "6427"
+        "deaths": "7340"
       }
     },
     {
@@ -4915,8 +4918,9 @@
         ]
       },
       "properties": {
+        "cases": "184252",
         "name": "Arkansas",
-        "deaths": "2321"
+        "deaths": "2911"
       }
     },
     {
@@ -5302,8 +5306,9 @@
         ]
       },
       "properties": {
+        "cases": "1554863",
         "name": "California",
-        "deaths": "18649"
+        "deaths": "20958"
       }
     },
     {
@@ -5381,8 +5386,9 @@
         ]
       },
       "properties": {
+        "cases": "287364",
         "name": "Colorado",
-        "deaths": "2752"
+        "deaths": "3916"
       }
     },
     {
@@ -5460,8 +5466,9 @@
         ]
       },
       "properties": {
+        "cases": "146761",
         "name": "Connecticut",
-        "deaths": "4828"
+        "deaths": "5363"
       }
     },
     {
@@ -5527,8 +5534,9 @@
         ]
       },
       "properties": {
+        "cases": "44876",
         "name": "Delaware",
-        "deaths": "746"
+        "deaths": "815"
       }
     },
     {
@@ -5562,8 +5570,9 @@
         ]
       },
       "properties": {
+        "cases": "24643",
         "name": "District of Columbia",
-        "deaths": "669"
+        "deaths": "713"
       }
     },
     {
@@ -5889,8 +5898,9 @@
         ]
       },
       "properties": {
+        "cases": "1116965",
         "name": "Florida",
-        "deaths": "17888"
+        "deaths": "19784"
       }
     },
     {
@@ -6108,8 +6118,9 @@
         ]
       },
       "properties": {
+        "cases": "518973",
         "name": "Georgia",
-        "deaths": "8904"
+        "deaths": "9779"
       }
     },
     {
@@ -6337,8 +6348,9 @@
         ]
       },
       "properties": {
+        "cases": "19225",
         "name": "Hawaii",
-        "deaths": "222"
+        "deaths": "269"
       }
     },
     {
@@ -6616,8 +6628,9 @@
         ]
       },
       "properties": {
+        "cases": "120703",
         "name": "Idaho",
-        "deaths": "849"
+        "deaths": "1173"
       }
     },
     {
@@ -6899,8 +6912,9 @@
         ]
       },
       "properties": {
+        "cases": "843328",
         "name": "Illinois",
-        "deaths": "11814"
+        "deaths": "15232"
       }
     },
     {
@@ -7098,8 +7112,9 @@
         ]
       },
       "properties": {
+        "cases": "422368",
         "name": "Indiana",
-        "deaths": "5206"
+        "deaths": "6758"
       }
     },
     {
@@ -7313,8 +7328,9 @@
         ]
       },
       "properties": {
+        "cases": "255009",
         "name": "Iowa",
-        "deaths": "2159"
+        "deaths": "3208"
       }
     },
     {
@@ -7380,8 +7396,9 @@
         ]
       },
       "properties": {
+        "cases": "188610",
         "name": "Kansas",
-        "deaths": "1410"
+        "deaths": "2072"
       }
     },
     {
@@ -7695,8 +7712,9 @@
         ]
       },
       "properties": {
+        "cases": "224155",
         "name": "Kentucky",
-        "deaths": "1862"
+        "deaths": "2446"
       }
     },
     {
@@ -8014,8 +8032,9 @@
         ]
       },
       "properties": {
+        "cases": "264191",
         "name": "Louisiana",
-        "deaths": "6233"
+        "deaths": "6767"
       }
     },
     {
@@ -8293,8 +8312,9 @@
         ]
       },
       "properties": {
+        "cases": "15620",
         "name": "Maine",
-        "deaths": "173"
+        "deaths": "257"
       }
     },
     {
@@ -8570,8 +8590,9 @@
         ]
       },
       "properties": {
+        "cases": "232172",
         "name": "Maryland",
-        "deaths": "4398"
+        "deaths": "5100"
       }
     },
     {
@@ -8725,8 +8746,9 @@
         ]
       },
       "properties": {
+        "cases": "285725",
         "name": "Massachusetts",
-        "deaths": "10469"
+        "deaths": "11307"
       }
     },
     {
@@ -9362,8 +9384,9 @@
         ]
       },
       "properties": {
+        "cases": "464368",
         "name": "Michigan",
-        "deaths": "8776"
+        "deaths": "11186"
       }
     },
     {
@@ -9709,8 +9732,9 @@
         ]
       },
       "properties": {
+        "cases": "375457",
         "name": "Minnesota",
-        "deaths": "3206"
+        "deaths": "4418"
       }
     },
     {
@@ -9908,8 +9932,9 @@
         ]
       },
       "properties": {
+        "cases": "177947",
         "name": "Mississippi",
-        "deaths": "3642"
+        "deaths": "4180"
       }
     },
     {
@@ -10135,8 +10160,9 @@
         ]
       },
       "properties": {
+        "cases": "360623",
         "name": "Missouri",
-        "deaths": "3675"
+        "deaths": "4754"
       }
     },
     {
@@ -10358,8 +10384,9 @@
         ]
       },
       "properties": {
+        "cases": "72659",
         "name": "Montana",
-        "deaths": "575"
+        "deaths": "816"
       }
     },
     {
@@ -10489,8 +10516,9 @@
         ]
       },
       "properties": {
+        "cases": "147792",
         "name": "Nebraska",
-        "deaths": "917"
+        "deaths": "1385"
       }
     },
     {
@@ -10588,8 +10616,9 @@
         ]
       },
       "properties": {
+        "cases": "184527",
         "name": "Nevada",
-        "deaths": "1987"
+        "deaths": "2530"
       }
     },
     {
@@ -10715,8 +10744,9 @@
         ]
       },
       "properties": {
+        "cases": "30244",
         "name": "New Hampshire",
-        "deaths": "507"
+        "deaths": "600"
       }
     },
     {
@@ -10858,8 +10888,9 @@
         ]
       },
       "properties": {
+        "cases": "398364",
         "name": "New Jersey",
-        "deaths": "16712"
+        "deaths": "17732"
       }
     },
     {
@@ -10941,8 +10972,9 @@
         ]
       },
       "properties": {
+        "cases": "118358",
         "name": "New Mexico",
-        "deaths": "1327"
+        "deaths": "1913"
       }
     },
     {
@@ -11228,8 +11260,9 @@
         ]
       },
       "properties": {
+        "cases": "770804",
         "name": "New York",
-        "deaths": "33696"
+        "deaths": "35074"
       }
     },
     {
@@ -11487,8 +11520,9 @@
         ]
       },
       "properties": {
+        "cases": "430325",
         "name": "North Carolina",
-        "deaths": "5012"
+        "deaths": "5831"
       }
     },
     {
@@ -11566,8 +11600,9 @@
         ]
       },
       "properties": {
+        "cases": "87596",
         "name": "North Dakota",
-        "deaths": "824"
+        "deaths": "1158"
       }
     },
     {
@@ -11769,8 +11804,9 @@
         ]
       },
       "properties": {
+        "cases": "553461",
         "name": "Ohio",
-        "deaths": "5955"
+        "deaths": "7477"
       }
     },
     {
@@ -11964,8 +12000,9 @@
         ]
       },
       "properties": {
+        "cases": "233336",
         "name": "Oklahoma",
-        "deaths": "1603"
+        "deaths": "2042"
       }
     },
     {
@@ -12203,8 +12240,9 @@
         ]
       },
       "properties": {
+        "cases": "92839",
         "name": "Oregon",
-        "deaths": "815"
+        "deaths": "1155"
       }
     },
     {
@@ -12350,8 +12388,9 @@
         ]
       },
       "properties": {
+        "cases": "485901",
         "name": "Pennsylvania",
-        "deaths": "9748"
+        "deaths": "12489"
       }
     },
     {
@@ -12431,8 +12470,9 @@
         ]
       },
       "properties": {
+        "cases": "70818",
         "name": "Rhode Island",
-        "deaths": "1294"
+        "deaths": "1509"
       }
     },
     {
@@ -12622,8 +12662,9 @@
         ]
       },
       "properties": {
+        "cases": "248798",
         "name": "South Carolina",
-        "deaths": "4231"
+        "deaths": "4685"
       }
     },
     {
@@ -12753,8 +12794,9 @@
         ]
       },
       "properties": {
+        "cases": "90407",
         "name": "South Dakota",
-        "deaths": "741"
+        "deaths": "1243"
       }
     },
     {
@@ -12940,8 +12982,9 @@
         ]
       },
       "properties": {
+        "cases": "432246",
         "name": "Tennessee",
-        "deaths": "4156"
+        "deaths": "5344"
       }
     },
     {
@@ -13563,8 +13606,9 @@
         ]
       },
       "properties": {
+        "cases": "1473318",
         "name": "Texas",
-        "deaths": "20872"
+        "deaths": "24400"
       }
     },
     {
@@ -13626,8 +13670,9 @@
         ]
       },
       "properties": {
+        "cases": "231821",
         "name": "Utah",
-        "deaths": "776"
+        "deaths": "1039"
       }
     },
     {
@@ -13753,8 +13798,9 @@
         ]
       },
       "properties": {
+        "cases": "5626",
         "name": "Vermont",
-        "deaths": "62"
+        "deaths": "95"
       }
     },
     {
@@ -14098,8 +14144,9 @@
         ]
       },
       "properties": {
+        "cases": "278615",
         "name": "Virginia",
-        "deaths": "3912"
+        "deaths": "4409"
       }
     },
     {
@@ -14411,8 +14458,9 @@
         ]
       },
       "properties": {
+        "cases": "207399",
         "name": "Washington",
-        "deaths": "2738"
+        "deaths": "3043"
       }
     },
     {
@@ -14686,8 +14734,9 @@
         ]
       },
       "properties": {
+        "cases": "62151",
         "name": "West Virginia",
-        "deaths": "639"
+        "deaths": "966"
       }
     },
     {
@@ -15001,8 +15050,9 @@
         ]
       },
       "properties": {
+        "cases": "465991",
         "name": "Wisconsin",
-        "deaths": "3106"
+        "deaths": "4329"
       }
     },
     {
@@ -15068,8 +15118,9 @@
         ]
       },
       "properties": {
+        "cases": "38907",
         "name": "Wyoming",
-        "deaths": "176"
+        "deaths": "321"
       }
     },
     {
@@ -15151,8 +15202,9 @@
         ]
       },
       "properties": {
+        "cases": "95338",
         "name": "Puerto Rico",
-        "deaths": "991"
+        "deaths": "1266"
       }
     }
   ]

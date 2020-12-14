@@ -25,18 +25,24 @@ myresult = mycursor.fetchall()
 
 i = 0
 
+d = dict()
 
 for x in myresult:
-    d[myresult[i][3]]=myresult[i][5]
+    d[myresult[i][3]] = []
+    d[myresult[i][3]].append(myresult[i][5])
+    d[myresult[i][3]].append(myresult[i][4])
     i+=1
     
+
+
 #counties data
 with open(file_counties, 'r') as f:
     data = geojson.load(f)
 
 for feature in data['features']:
     if feature['properties']['countyFIPS'] in d:
-        feature['properties']['population']=d[feature['properties']['countyFIPS']]
+        feature['properties']['deaths']=d[feature['properties']['countyFIPS']][0]
+        feature['properties']['cases']=d[feature['properties']['countyFIPS']][1]
 
 with open(file_new_counties, 'w+') as f:
     geojson.dump(data, f, indent=2)
