@@ -1,81 +1,10 @@
 
-//import * as mysql from "/../../node_modules/@types/mysql/index";
-
-
-
-
-//var requirejs = require("requirejs");
-/*
-requirejs.config({
-  nodeRequire: require,
-  baseUrl: ".",
-  paths: {
-    mysql: "mysql"
-   }
-});
-requirejs(['foo', 'bar'],
-*/
-
-
-
-
-/*
-// create a new connection to the database
-const connection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "root",
-    database: "covid_map"
-  });
-
-  // open the connection
-  connection.connect(error => {
-    if (error) {
-      console.error(error);
-    } else {
-      let query = "SELECT deaths FROM us WHERE date='2020-11-08' AND fips='" + filter + "'";
-      connection.query(query, (error, response) => {
-        //res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
-        console.log(error, response);
-      });
-      connection.end();
-    }
-  })
-}
-*/
-/*
-function updateData(filter){
-  //const mysql = require("mysql");
-
-  // create a new connection to the database
-  const connection = mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "root",
-      database: "covid_map"
-    });
-  
-    // open the connection
-    connection.connect(error => {
-      if (error) {
-        console.error(error);
-      } else {
-        let query = "SELECT deaths FROM counties WHERE fips='" + filter + "' AND date = '12/7/20'";
-        connection.query(query, (error, response) => {
-          //res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
-          console.log(error, response);
-        });
-        connection.end();
-      }
-    });
-}
-*/
-
 
 var countiesData = 'data/counties_deaths.geojson';
 var statesData = 'data/states_deaths.geojson';
 var usData = 'data/us_deaths.geojson';
 var geoData = 'placeholder';
+var flag = 'placeholder';
 var mapArr =[];
 //var map = L.map('map').setView([39.9897471840457, -75.13893127441406], 4)
 
@@ -89,7 +18,7 @@ L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
 }).addTo(map)
 
 
-function getColorStates(d) {
+function getColorStatesDeaths(d) {
   return d > 10000  ? '#bd0026' :
          d > 5000   ? '#f03b20' :
          d > 1000   ? '#fd8d3c' :
@@ -97,7 +26,15 @@ function getColorStates(d) {
                       '#ffffb2';
 }
 
-function getColorCounties(d) {
+function getColorStatesCases(d) {
+  return d > 1000000  ? '#bd0026' :
+         d > 500000   ? '#f03b20' :
+         d > 100000   ? '#fd8d3c' :
+         d > 50000   ?  '#fecc5c' :
+                      '#ffffb2';
+}
+
+function getColorCountiesDeaths(d) {
   return d > 500  ? '#bd0026' :
          d > 100   ? '#f03b20' :
          d > 50   ? '#fd8d3c' :
@@ -105,8 +42,16 @@ function getColorCounties(d) {
                       '#ffffb2';
 }
 
+function getColorCountiesCases(d) {
+  return d > 100000  ? '#bd0026' :
+         d > 50000   ? '#f03b20' :
+         d > 10000   ? '#fd8d3c' :
+         d > 5000   ?  '#fecc5c' :
+                      '#ffffb2';
+}
 
-function statesInfo(){
+
+function statesDeathsInfo(){
 // Add GeoJSON
 
 $.getJSON(geoData, function (geojson) {
@@ -114,7 +59,7 @@ $.getJSON(geoData, function (geojson) {
     {
     style: function (feature) {
         return {
-          fillColor: getColorStates(feature.properties.deaths),
+          fillColor: getColorStatesDeaths(feature.properties.deaths),
           weight: 2,
           opacity: 1,
           color: 'white',
@@ -146,14 +91,15 @@ $.getJSON(geoData, function (geojson) {
 })
 }
 
-function countiesInfo(){
+function statesCasesInfo(){
   // Add GeoJSON
+  
   $.getJSON(geoData, function (geojson) {
     var geojsonLayer = new L.GeoJSON(geojson, 
       {
       style: function (feature) {
           return {
-            fillColor: getColorCounties(feature.properties.deaths),
+            fillColor: getColorStatesCases(feature.properties.cases),
             weight: 2,
             opacity: 1,
             color: 'white',
@@ -184,6 +130,84 @@ function countiesInfo(){
   }).addTo(layerGroup)
   })
   }
+
+function countiesDeathsInfo(){
+  // Add GeoJSON
+  $.getJSON(geoData, function (geojson) {
+    var geojsonLayer = new L.GeoJSON(geojson, 
+      {
+      style: function (feature) {
+          return {
+            fillColor: getColorCountiesDeaths(feature.properties.deaths),
+            weight: 2,
+            opacity: 1,
+            color: 'white',
+            fillOpacity: 0.7
+          }
+      },
+      onEachFeature: function (feature, layer) {
+          layer.on('mouseover', function (e) {
+            var layer = e.target;
+  
+            layer.setStyle({
+                weight: 5,
+                color: '#666',
+                dashArray: '',
+                fillOpacity: 0.7
+            });
+          
+            if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+                layer.bringToFront();
+            }
+            info.update(layer.feature.properties);
+          });
+          layer.on('mouseout', function () {
+              geojsonLayer.resetStyle(this);
+              info.update();
+          });
+      }
+  }).addTo(layerGroup)
+  })
+  }
+
+  function countiesCasesInfo(){
+    // Add GeoJSON
+    $.getJSON(geoData, function (geojson) {
+      var geojsonLayer = new L.GeoJSON(geojson, 
+        {
+        style: function (feature) {
+            return {
+              fillColor: getColorCountiesCases(feature.properties.cases),
+              weight: 2,
+              opacity: 1,
+              color: 'white',
+              fillOpacity: 0.7
+            }
+        },
+        onEachFeature: function (feature, layer) {
+            layer.on('mouseover', function (e) {
+              var layer = e.target;
+    
+              layer.setStyle({
+                  weight: 5,
+                  color: '#666',
+                  dashArray: '',
+                  fillOpacity: 0.7
+              });
+            
+              if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+                  layer.bringToFront();
+              }
+              info.update(layer.feature.properties);
+            });
+            layer.on('mouseout', function () {
+                geojsonLayer.resetStyle(this);
+                info.update();
+            });
+        }
+    }).addTo(layerGroup)
+    })
+    }
 
 //For hover
 function highlightFeature(e) {
@@ -226,15 +250,27 @@ info.onAdd = function (map) {
 //INFO CARD TEXT HERE PLS
 // method that we will use to update the control based on feature properties passed
 info.update = function (props) {
-  if(geoData == statesData){
+  if(flag == 'statesDeaths'){
     this._div.innerHTML = '<h4>State Deaths</h4>' +  (props ?
         '<b>' + props.name + '</b><br />' + props.deaths + ' deaths'
         : 'Hover over a state');
     }
-    else if(geoData == countiesData)
+    else if(flag == 'countiesDeaths')
     {
       this._div.innerHTML = '<h4>County Deaths</h4>' +  (props ?
         '<b>' + props["state_name"] + '</b><br />' + props["County Name"] + '</b><br />' + props.deaths + ' deaths'
+        : 'Hover over a state');
+    }
+    else if(flag == 'statesCases')
+    {
+      this._div.innerHTML = '<h4>State Cases</h4>' +  (props ?
+        '<b>' + props.name + '</b><br />' + props.cases + ' cases'
+        : 'Hover over a state');
+    }
+    else if(flag == 'countiesCases')
+    {
+      this._div.innerHTML = '<h4>County Cases</h4>' +  (props ?
+        '<b>' + props["state_name"] + '</b><br />' + props["County Name"] + '</b><br />' + props.cases + ' cases'
         : 'Hover over a state');
     }
     else if(geoData == 'placeholder')
@@ -252,7 +288,7 @@ var legend = L.control({position: 'bottomright'});
 
 legend.onAdd = function (map) {
 
-  if(geoData == statesData){
+  if(flag == 'statesDeaths'){
     var div = L.DomUtil.create('div', 'info legend'),
         grades = [0, 100, 1000, 5000, 10000],
         labels = [],
@@ -270,9 +306,44 @@ for (var i = 0; i < grades.length; i++) {
   }
 
 
-  else if(geoData == countiesData){
+  else if(flag == 'statesCases'){
+    var div = L.DomUtil.create('div', 'info legend'),
+        grades = [0, 50000, 100000, 500000, 1000000],
+        labels = [],
+        colors = ['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026'];
+
+  
+//LEGEND TEXT RIGHT HERE PLS
+// loop through our density intervals and generate a label with a colored square for each interval
+div.innerHTML += '<h2 style = "text-align: center">Legend</h2>';
+for (var i = 0; i < grades.length; i++) {
+  div.innerHTML +=
+  '<i style="background:' + colors[i] + '"></i> ' +
+  grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+}
+  }
+
+
+  else if(flag == 'countiesDeaths'){
     var div = L.DomUtil.create('div', 'info legend'),
         grades = [0, 10, 50, 100, 500],
+        labels = [],
+        colors = ['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026'];
+
+  
+//LEGEND TEXT RIGHT HERE PLS
+// loop through our density intervals and generate a label with a colored square for each interval
+div.innerHTML += '<h2 style = "text-align: center">Legend</h2>';
+for (var i = 0; i < grades.length; i++) {
+  div.innerHTML +=
+  '<i style="background:' + colors[i] + '"></i> ' +
+  grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+}
+  }
+
+  else if(flag == 'countiesCases'){
+    var div = L.DomUtil.create('div', 'info legend'),
+        grades = [0, 5000, 10000, 50000, 100000],
         labels = [],
         colors = ['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026'];
 
@@ -319,8 +390,9 @@ $('#button1').click(function (){
   console.log("button1");
   //layerGroup.clearLayers(),
   geoData = statesData;
+  flag = 'statesDeaths';
   layerGroup.clearLayers();
-  statesInfo();
+  statesDeathsInfo();
   legend.addTo(map);
  });
 
@@ -328,8 +400,9 @@ $('#button1').click(function (){
   console.log("button2");
   //layerGroup.clearLayers(),
   geoData = countiesData;
+  flag = 'countiesDeaths';
   layerGroup.clearLayers();
-  countiesInfo();
+  countiesDeathsInfo();
   legend.addTo(map);
  });
  
@@ -338,8 +411,9 @@ $('#button1').click(function (){
   console.log("button1");
   //layerGroup.clearLayers(),
   geoData = statesData;
+  flag = 'statesCases';
   layerGroup.clearLayers();
-  statesInfo();
+  statesCasesInfo();
   legend.addTo(map);
  });
 
@@ -347,8 +421,9 @@ $('#button1').click(function (){
   console.log("button2");
   //layerGroup.clearLayers(),
   geoData = countiesData;
+  flag = 'countiesCases';
   layerGroup.clearLayers();
-  countiesInfo();
+  countiesCasesInfo();
   legend.addTo(map);
  });
  

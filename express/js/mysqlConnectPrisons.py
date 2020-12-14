@@ -5,7 +5,6 @@ from datetime import datetime, timedelta
 
 yesterday = (datetime.now() - timedelta(2)).strftime('%m/%d/%Y')
 
-print
 
 file_prisons = 'express/data/us-states.geojson'
 file_new_prisons = 'express/data/prisons_deaths.geojson'

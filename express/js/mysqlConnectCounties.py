@@ -4,7 +4,8 @@ import ast
 from datetime import datetime, timedelta
 from collections import defaultdict
 
-yesterday = (datetime.now() - timedelta(1)).strftime('%Y-%m-%d')
+#two days ago actually
+yesterday = (datetime.now() - timedelta(2)).strftime('%Y-%m-%d')
 
 file_counties = 'express/data/test.geojson'
 file_new_counties = 'express/data/counties_deaths.geojson'

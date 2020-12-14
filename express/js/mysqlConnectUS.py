@@ -3,7 +3,8 @@ import geojson
 import ast
 from datetime import datetime, timedelta
 
-yesterday = (datetime.now() - timedelta(1)).strftime('%Y-%m-%d')
+#two days ago actually
+yesterday = (datetime.now() - timedelta(2)).strftime('%Y-%m-%d')
 
 
 
