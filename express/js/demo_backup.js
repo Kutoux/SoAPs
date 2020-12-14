@@ -88,102 +88,49 @@ L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>; ©<a href="https://github.com/nytimes/covid-19-data/"> NY Times</a>;The SoAPs: Bobby King, Jennifer Nguyen, Karim Durrani, Aidan Pare, Frances Watson'
 }).addTo(map)
 
-
-function getColorStates(d) {
-  return d > 10000  ? '#bd0026' :
-         d > 5000   ? '#f03b20' :
-         d > 1000   ? '#fd8d3c' :
-         d > 100   ?  '#fecc5c' :
-                      '#ffffb2';
+/*
+function getColor(d) {
+  return d > 1000 ? '#800026' :
+         d > 500  ? '#BD0026' :
+         d > 200  ? '#E31A1C' :
+         d > 100  ? '#FC4E2A' :
+         d > 50   ? '#FD8D3C' :
+         d > 20   ? '#FEB24C' :
+         d > 10   ? '#FED976' :
+                    '#FFEDA0';
 }
+*/
 
-function getColorCounties(d) {
-  return d > 500  ? '#bd0026' :
-         d > 100   ? '#f03b20' :
-         d > 50   ? '#fd8d3c' :
-         d > 10   ?  '#fecc5c' :
-                      '#ffffb2';
-}
-
-
-function statesInfo(){
+function mapInfo(){
 // Add GeoJSON
-
 $.getJSON(geoData, function (geojson) {
-  var geojsonLayer = new L.GeoJSON(geojson, 
-    {
-    style: function (feature) {
-        return {
-          fillColor: getColorStates(feature.properties.deaths),
-          weight: 2,
-          opacity: 1,
-          color: 'white',
-          fillOpacity: 0.7
-        }
+  layerGroup.clearLayers(),
+  L.choropleth(geojson, {
+    valueProperty: 'deaths',
+    scale: ['#ffffb2', '#e31a1c'],
+    steps: 6,
+    mode: 'q',
+    style: {
+      color: '#fff',
+      weight: 2,
+      fillOpacity: 0.8
     },
     onEachFeature: function (feature, layer) {
-        layer.on('mouseover', function (e) {
-          var layer = e.target;
-
-          layer.setStyle({
-              weight: 5,
-              color: '#666',
-              dashArray: '',
-              fillOpacity: 0.7
-          });
-        
-          if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-              layer.bringToFront();
-          }
-          info.update(layer.feature.properties);
-        });
-        layer.on('mouseout', function () {
-            geojsonLayer.resetStyle(this);
-            info.update();
-        });
+      layer.on({
+        mouseover: highlightFeature,
+        mouseout: resetHighlight,
+        click: zoomToFeature
+    });
+      if(geoData == countiesData){
+        layer.bindPopup('<b>' + feature.properties["state_name"].toUpperCase() + '<br>' + feature.properties["County Name"].toUpperCase() + '<br>' + 'Deaths: ' + '<i>' + feature.properties["deaths"]);
+      }
+      else if(geoData == statesData){
+        layer.bindPopup('<b>' + feature.properties["name"].toUpperCase() + '<br>' + 'Deaths: ' + '<i>' + feature.properties["deaths"]);
+      }
     }
-}).addTo(layerGroup)
+  }).addTo(layerGroup)
 })
 }
-
-function countiesInfo(){
-  // Add GeoJSON
-  $.getJSON(geoData, function (geojson) {
-    var geojsonLayer = new L.GeoJSON(geojson, 
-      {
-      style: function (feature) {
-          return {
-            fillColor: getColorCounties(feature.properties.deaths),
-            weight: 2,
-            opacity: 1,
-            color: 'white',
-            fillOpacity: 0.7
-          }
-      },
-      onEachFeature: function (feature, layer) {
-          layer.on('mouseover', function (e) {
-            var layer = e.target;
-  
-            layer.setStyle({
-                weight: 5,
-                color: '#666',
-                dashArray: '',
-                fillOpacity: 0.7
-            });
-          
-            if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-                layer.bringToFront();
-            }
-            info.update(layer.feature.properties);
-          });
-          layer.on('mouseout', function () {
-              geojsonLayer.resetStyle(this);
-              info.update();
-          });
-      }
-  }).addTo(layerGroup)
-  })
-  }
 
 //For hover
 function highlightFeature(e) {
@@ -203,7 +150,7 @@ function highlightFeature(e) {
 }
 
 function resetHighlight(e) {
-  resetStyle(e.target);
+  L.layerGroup.resetStyle(e.target);
   info.update();
 }
 
@@ -223,7 +170,6 @@ info.onAdd = function (map) {
     return this._div;
 };
 
-//INFO CARD TEXT HERE PLS
 // method that we will use to update the control based on feature properties passed
 info.update = function (props) {
   if(geoData == statesData){
@@ -252,44 +198,33 @@ var legend = L.control({position: 'bottomright'});
 
 legend.onAdd = function (map) {
 
-  if(geoData == statesData){
     var div = L.DomUtil.create('div', 'info legend'),
-        grades = [0, 100, 1000, 5000, 10000],
+        grades = [0, 100, 500, 1000, 5000],
         labels = [],
-        colors = ['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026'];
+        colors = ['#FFFFB2', '#F9D194', '#EE7658', '#E9483A', '#E31A1C'];
 
-  
-//LEGEND TEXT RIGHT HERE PLS
+        /*
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + (colors[i] + 1) + '"></i> ' +
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+    }
+*/
+
 // loop through our density intervals and generate a label with a colored square for each interval
 for (var i = 0; i < grades.length; i++) {
   div.innerHTML +=
-  '<i style="background:' + colors[i] + '"></i> ' +
-  grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+      '<i style="background:' + (colors[i]) + '"></i> ' +
+      grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
 }
-  }
 
-
-  else if(geoData == countiesData){
-    var div = L.DomUtil.create('div', 'info legend'),
-        grades = [0, 10, 50, 100, 500],
-        labels = [],
-        colors = ['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026'];
-
-  
-//LEGEND TEXT RIGHT HERE PLS
-// loop through our density intervals and generate a label with a colored square for each interval
-for (var i = 0; i < grades.length; i++) {
-  div.innerHTML +=
-  '<i style="background:' + colors[i] + '"></i> ' +
-  grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-}
-  }
    
 
     return div;
 };
 
-//legend.addTo(map);
+legend.addTo(map);
 
 
 /*
@@ -314,20 +249,16 @@ $('#header').function(){
 //$(":button").css("background-color", "red");
 $('#button1').click(function (){
   console.log("button1");
-  //layerGroup.clearLayers(),
+  //clearLayers();
   geoData = statesData;
-  layerGroup.clearLayers();
-  statesInfo();
-  legend.addTo(map);
+  mapInfo();
  });
 
  $('#button2').click(function (){
   console.log("button2");
-  //layerGroup.clearLayers(),
+  //map.clearLayers();
   geoData = countiesData;
-  layerGroup.clearLayers();
-  countiesInfo();
-  legend.addTo(map);
+  mapInfo();
  });
  
  
