@@ -74,6 +74,7 @@ function updateData(filter){
 
 var countiesData = 'data/counties_deaths.geojson';
 var statesData = 'data/states_deaths.geojson';
+var usData = 'data/us_deaths.geojson';
 var geoData = countiesData;
 var mapArr =[];
 //var map = L.map('map').setView([39.9897471840457, -75.13893127441406], 4)
@@ -177,3 +178,17 @@ $.updateData({ url: 'get.php',
         });
         */
 
+/*var text = localStorage.getItem(usData);*/
+/*var obj = JSON.parse(text);*/
+
+  $.get(usData).done( function(data){
+      $('#cases').html(JSON.stringify(data.features[0].properties.cases));
+ });
+
+ $.get(usData).done( function(data){
+  $('#deaths').html(JSON.stringify(data.features[0].properties.deaths));
+});
+
+$.get(usData).done( function(data){
+  $('#date').html(JSON.stringify(data.features[0].properties.date));
+});

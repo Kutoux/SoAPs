@@ -37,24 +37,16 @@
     width: 50%;
   }
 
-  .header {
-    padding: 60px;
-    text-align: center;
-    background: #1abc9c;
-    color: white;
-    font-size: 30px;
-  }
-
   body {
     height: 100%;
-  width: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
 }
 
 /* Header/Logo Title */
 .header {
-  height: 17vh;
+  height: 20vh;
   padding-top: 1px;
     text-align: center;
     background: url(https://montanafirechiefs.com/wp-content/uploads/2020/06/coronavirusmolecule.jpg);
@@ -62,7 +54,7 @@
     background-size: cover;
     color: white;
     text-shadow: 2px 2px 0px #000000;
-    font-size: 20px;
+    font-size: 17px;
 }
 
 .sidenav {
