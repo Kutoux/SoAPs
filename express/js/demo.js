@@ -261,6 +261,7 @@ legend.onAdd = function (map) {
   
 //LEGEND TEXT RIGHT HERE PLS
 // loop through our density intervals and generate a label with a colored square for each interval
+div.innerHTML += '<h2 style = "text-align: center">Legend</h2>';
 for (var i = 0; i < grades.length; i++) {
   div.innerHTML +=
   '<i style="background:' + colors[i] + '"></i> ' +
@@ -278,6 +279,7 @@ for (var i = 0; i < grades.length; i++) {
   
 //LEGEND TEXT RIGHT HERE PLS
 // loop through our density intervals and generate a label with a colored square for each interval
+div.innerHTML += '<h2 style = "text-align: center">Legend</h2>';
 for (var i = 0; i < grades.length; i++) {
   div.innerHTML +=
   '<i style="background:' + colors[i] + '"></i> ' +
@@ -312,6 +314,7 @@ $('#header').function(){
 }
 */
 //$(":button").css("background-color", "red");
+/*deaths*/
 $('#button1').click(function (){
   console.log("button1");
   //layerGroup.clearLayers(),
@@ -330,6 +333,24 @@ $('#button1').click(function (){
   legend.addTo(map);
  });
  
+ /*cases*/
+ $('#button3').click(function (){
+  console.log("button1");
+  //layerGroup.clearLayers(),
+  geoData = statesData;
+  layerGroup.clearLayers();
+  statesInfo();
+  legend.addTo(map);
+ });
+
+ $('#button4').click(function (){
+  console.log("button2");
+  //layerGroup.clearLayers(),
+  geoData = countiesData;
+  layerGroup.clearLayers();
+  countiesInfo();
+  legend.addTo(map);
+ });
  
 
  /*
