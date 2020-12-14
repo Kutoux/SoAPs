@@ -2,6 +2,7 @@ import mysql.connector
 import geojson
 import ast
 from datetime import datetime, timedelta
+from collections import defaultdict
 
 yesterday = (datetime.now() - timedelta(1)).strftime('%Y-%m-%d')
 
@@ -28,7 +29,7 @@ i = 0
 
 
 for x in myresult:
-    d[myresult[i][3]]=myresult[i][5]
+    d[myresult[i][2]]=myresult[i][4]
     i+=1
 
 
