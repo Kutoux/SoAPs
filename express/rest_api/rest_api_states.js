@@ -40,7 +40,28 @@ fetch('https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.
           if (error) {
             console.error(error);
           } else {
-            let query =
+
+            let query = "use covid_map;";
+              connection.query(query, (error, response) => {
+                console.log(error, response);
+              });
+
+              query = "set sql_safe_updates = 0;";
+              connection.query(query, (error, response) => {
+                console.log(error, response);
+              });
+
+            query = "DROP TABLE if exists states;";
+              connection.query(query, (error, response) => {
+                console.log(error, response);
+              });
+
+            query = "create table states(date varchar(255),state varchar(255),fips varchar(255),cases varchar(255),deaths varchar(255));";
+              connection.query(query, (error, response) => {
+                console.log(error, response);
+              });
+
+            query =
               "INSERT INTO states(date, state, fips, cases, deaths) VALUES ?";
             connection.query(query, [newArr], (error, response) => {
               console.log(error, response);
