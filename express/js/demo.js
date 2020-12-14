@@ -84,7 +84,7 @@ var layerGroup = L.layerGroup().addTo(map);
 // Add basemap
 L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
   maxZoom: 18,
-  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>; The SoAPs: Bobby King, Jennifer Nguyen, Karim Durrani, Aidan Pare, Frances Watson'
+  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>; ©<a href="https://github.com/nytimes/covid-19-data/"> NY Times</a>;The SoAPs: Bobby King, Jennifer Nguyen, Karim Durrani, Aidan Pare, Frances Watson'
 }).addTo(map)
 
 /*
@@ -115,16 +115,109 @@ $.getJSON(geoData, function (geojson) {
       fillOpacity: 0.8
     },
     onEachFeature: function (feature, layer) {
+      layer.on({
+        mouseover: highlightFeature,
+        mouseout: resetHighlight,
+        click: zoomToFeature
+    });
       if(geoData == countiesData){
-        layer.bindPopup('<b>' + feature.properties["state_name"].toUpperCase() + '<br>' + feature.properties["County Name"].toUpperCase() + '<br>' + 'Deaths: ' + '<i>' + feature.properties["deaths"])
+        layer.bindPopup('<b>' + feature.properties["state_name"].toUpperCase() + '<br>' + feature.properties["County Name"].toUpperCase() + '<br>' + 'Deaths: ' + '<i>' + feature.properties["deaths"]);
       }
       else if(geoData == statesData){
-        layer.bindPopup('<b>' + feature.properties["name"].toUpperCase() + '<br>' + 'Deaths: ' + '<i>' + feature.properties["deaths"])
+        layer.bindPopup('<b>' + feature.properties["name"].toUpperCase() + '<br>' + 'Deaths: ' + '<i>' + feature.properties["deaths"]);
       }
     }
   }).addTo(layerGroup)
 })
 }
+
+//For hover
+function highlightFeature(e) {
+  var layer = e.target;
+
+  layer.setStyle({
+      weight: 5,
+      color: '#666',
+      dashArray: '',
+      fillOpacity: 0.7
+  });
+
+  if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+      layer.bringToFront();
+  }
+  info.update(layer.feature.properties);
+}
+
+function resetHighlight(e) {
+  layerGroup.resetStyle(e.target);
+  info.update();
+}
+
+function zoomToFeature(e) {
+  map.fitBounds(e.target.getBounds());
+}
+
+
+
+//For custom info
+
+var info = L.control();
+
+info.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+    this.update();
+    return this._div;
+};
+
+// method that we will use to update the control based on feature properties passed
+info.update = function (props) {
+  if(geoData == statesData){
+    this._div.innerHTML = '<h4>State Deaths</h4>' +  (props ?
+        '<b>' + props.name + '</b><br />' + props.deaths + ' deaths'
+        : 'Hover over a state');
+    }
+    else if(geoData == countiesData)
+    {
+      this._div.innerHTML = '<h4>County Deaths</h4>' +  (props ?
+        '<b>' + props["state_name"] + '</b><br />' + props["County Name"] + '</b><br />' + props.deaths + ' deaths'
+        : 'Hover over a state');
+    }
+};
+
+info.addTo(map);
+
+
+var legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function (map) {
+
+    var div = L.DomUtil.create('div', 'info legend'),
+        grades = [0, 100, 500, 1000, 5000],
+        labels = [],
+        colors = ['#FFFFB2', '#F9D194', '#EE7658', '#E9483A', '#E31A1C'];
+
+        /*
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + (colors[i] + 1) + '"></i> ' +
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+    }
+*/
+
+// loop through our density intervals and generate a label with a colored square for each interval
+for (var i = 0; i < grades.length; i++) {
+  div.innerHTML +=
+      '<i style="background:' + (colors[i]) + '"></i> ' +
+      grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+}
+
+   
+
+    return div;
+};
+
+legend.addTo(map);
 
 
 /*
