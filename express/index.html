@@ -6,17 +6,20 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.2/leaflet.css">
 		<link rel="stylesheet" type="text/css" href="css/general.css" media="screen" />
 		<div class="header">
-			<h1>Header</h1>
-			<p>My supercool header</p>
+			<h1>US COVID-19 Map</h1>
+			<p>Total US COVID-19 Cases: </p>
+			<p>Total US COVID-19 Deaths: </p>
 		  </div>
 	</head>
 	<body>
-		<div id="map" style="height: 600px"></div>
+		<div id="map" style="height: 74vh"></div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.2/leaflet.js"></script>
 		<script src="data/choropleth.js"></script>
-		<a id = "button1" class="button">States Data</a>
-		<a id = "button2" class="button">Counties Data</a>
+		<div class="sidenav">
+			<a id = "button1" >View States Data</a>
+			<a id = "button2" >View Counties Data</a>
+		</div>	
 		<script src= "js/demo.js"></script>
 		
 	</body>
